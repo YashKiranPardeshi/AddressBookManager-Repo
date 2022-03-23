@@ -1,39 +1,59 @@
 package com.infogalaxy;
 
+import java.util.ArrayList;
 import java.util.Scanner;
-
 public class AdderssBook {
-    Scanner sc = new Scanner (System.in);
-    Contact Contact = new Contact();
+    ArrayList<Contact> ContactList = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
 
-    public void getContact(){
+    public void getContact() {
+        Contact contact = new Contact();
         System.out.println("Enter the First Name : ");
-        Contact.setFirstName(sc.next());
+        contact.setFirstName(sc.next());
         System.out.println("Enter the Last Name : ");
-        Contact.setLastName(sc.next());
+        contact.setLastName(sc.next());
         System.out.println("Enter the Address : ");
-        Contact.setAddress(sc.next());
+        contact.setAddress(sc.next());
         System.out.println("Enter the City : ");
-        Contact.setCity(sc.next());
+        contact.setCity(sc.next());
         System.out.println("Enter the State : ");
-        Contact.setState(sc.next());
+        contact.setState(sc.next());
         System.out.println("Enter the Mobile No :");
-        Contact.setMobno(sc.next());
+        contact.setMobno(sc.next());
         System.out.println("Enter the Email Id :");
-        Contact.setEmail(sc.next());
+        contact.setEmail(sc.next());
         System.out.println("Enter the Zip Code : ");
-        Contact.setZip(sc.next());
-    }
-    public void displaycontact(){
-        System.out.println(Contact.toString());
-    }
-    public static void main(String[] args){
-        AdderssBook adderssBook = new AdderssBook();
-        adderssBook.getContact();
-        adderssBook.displaycontact();
+        contact.setZip(sc.next());
+        ContactList.add(contact);
     }
 
-};
+    public void displaycontact() {
+        for (int i = 0; i < ContactList.size(); i++) {
+            Contact contact = ContactList.get(i);
+            System.out.println(contact.toString());
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        AdderssBook adderssBook = new AdderssBook();
+        int choice;
+        do {
+            System.out.println("*** CONTACT INVENTORY MANAGEMENT ***");
+            System.out.println("\n1. ADD CONTACT \n2. DISPLAY CONTACT \n3. EXIT ");
+            System.out.println("ENTER YOUR CHOICE :");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    adderssBook.getContact();
+                    break;
+                case 2:
+                    adderssBook.displaycontact();
+                    break;
+            }
+        } while (choice != 3);
+    }
+}
 
 
 
