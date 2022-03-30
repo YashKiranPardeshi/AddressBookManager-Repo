@@ -1,5 +1,9 @@
 package com.infogalaxy;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -92,6 +96,21 @@ public class AdderssBook {
             }
         }
     }
+    public void backupToFile(){
+        String contactData = null;
+        for(int i = 0; i < ContactList . size(); i++){
+            Contact contact = ContactList.get(i);
+            contactData = contact.getFirstName()+","+contact.getLastName()+","+contact.getAddress()+","+contact.getCity()+","+contact.getState()+","+
+                    contact.getMobno()+","+contact.getEmail()+","+contact.getZip()+"\n"+contactData;
+        }
+        Path file = Paths.get("MYData.txt");
+        byte[] filedata = contactData.getBytes();
+        try {
+            Files.write(file, filedata);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -99,7 +118,7 @@ public class AdderssBook {
         int choice;
         do {
             System.out.println("*** CONTACT INVENTORY MANAGEMENT ***");
-            System.out.println("\n1. ADD CONTACT \n2. DISPLAY CONTACT \n3. editName \n4. Find State  \n5. delete \n6. Exit ");
+            System.out.println("\n1. ADD CONTACT \n2. DISPLAY CONTACT \n3. editName \n4. Find State  \n5. delete \n6. BACKUP TO FILE \n7. Exit ");
             System.out.println("ENTER YOUR CHOICE :");
             choice = sc.nextInt();
             switch (choice) {
@@ -117,6 +136,9 @@ public class AdderssBook {
                     break;
                 case 5:
                     adderssBook.delete();
+                    break;
+                case 6:
+                    adderssBook.backupToFile();
                     break;
             }
         } while (choice != 6);
